@@ -16,7 +16,7 @@ java_binary(
     deploy_manifest_lines = [
         "Implementation-Vendor: Gerrit User Conference 2016",
     ],
-    main_class = "org.mailformed.file.name.Repro",
+    main_class = "org.gerritcon.mv2016.Printy",
     runtime_deps = [":printy_lib"],
 )
 
