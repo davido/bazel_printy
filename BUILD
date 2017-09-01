@@ -6,9 +6,9 @@ java_library(
 
 genrule(
     name = "gen_version",
-    stamp = 1,
-    cmd = "echo $$(cat bazel-out/stable-status.txt | grep PRINTY | cut -d ' ' -f 2) > $@",
     outs = ["gen_version.txt"],
+    cmd = "echo $$(cat bazel-out/stable-status.txt | grep PRINTY | cut -d ' ' -f 2) > $@",
+    stamp = 1,
 )
 
 java_binary(
@@ -23,7 +23,7 @@ java_binary(
 genrule(
     name = "printy_stamped",
     srcs = [":printy_deploy.jar"],
-    tools = [":gen_version.txt"],
+    outs = ["printy_stamped.jar"],
     cmd = " && ".join([
         "r=$$PWD",
         "t=$$(mktemp -d)",
@@ -31,6 +31,7 @@ genrule(
         "unzip -q $$r/$<",
         "GEN_VERSION=$$(cat $$r/$(location :gen_version.txt))",
         "echo \"Implementation-Version: $$GEN_VERSION\n$$(cat META-INF/MANIFEST.MF)\" > META-INF/MANIFEST.MF",
-        "zip -qr $$r/$@ ."]),
-    outs = ["printy_stamped.jar"],
+        "zip -qr $$r/$@ .",
+    ]),
+    tools = [":gen_version.txt"],
 )
