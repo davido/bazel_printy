@@ -1,7 +1,16 @@
+java_plugin(
+    name = "nullaway",
+    deps = [
+        "@nullaway//jar",
+        "@guava//jar",
+    ],
+)
+
 java_library(
     name = "printy_lib",
     srcs = glob(["src/main/java/**/*.java"]),
     deps = ["@guava//jar"],
+    plugins = [":nullaway"],
 )
 
 genrule(
