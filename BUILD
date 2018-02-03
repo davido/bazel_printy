@@ -44,3 +44,9 @@ genrule(
     ]),
     tools = [":gen_version.txt"],
 )
+
+java_test(
+    name = "printy_tests",
+    srcs = ["src/test/java/org/gerritcon/mv2016/PrintyTest.java"],
+    test_class = "org.gerritcon.mv2016.PrintyTest",
+)
