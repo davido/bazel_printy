@@ -1,1 +1,0 @@
-build --workspace_status_command=./tools/workspace-status.sh --javacopt="-XepOpt:NullAway:AnnotatedPackages=org.gerritcon.mv2016 -Xep:NullAway:ERROR"

@@ -1,23 +1,8 @@
-java_plugin(
-    name = "nullaway",
-    deps = [
-        "@nullaway//jar",
-        "@guava//jar",
-    ],
-)
-
 java_library(
     name = "printy_lib",
     srcs = glob(["src/main/java/**/*.java"]),
     deps = ["@guava//jar"],
     plugins = [":nullaway"],
-)
-
-genrule(
-    name = "gen_version",
-    outs = ["gen_version.txt"],
-    cmd = "echo $$(cat bazel-out/stable-status.txt | grep PRINTY | cut -d ' ' -f 2) > $@",
-    stamp = 1,
 )
 
 java_binary(
@@ -27,6 +12,13 @@ java_binary(
     ],
     main_class = "org.gerritcon.mv2016.Printy",
     runtime_deps = [":printy_lib"],
+)
+
+genrule(
+    name = "gen_version",
+    outs = ["gen_version.txt"],
+    cmd = "echo $$(cat bazel-out/stable-status.txt | grep PRINTY | cut -d ' ' -f 2) > $@",
+    stamp = 1,
 )
 
 genrule(
